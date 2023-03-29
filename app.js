@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'my_database'
+  database: 'employees'
 });
 
 // function to start the application
@@ -65,7 +65,7 @@ async function start() {
 // function to view all departments
 async function viewAllDepartments() {
   // execute the query to get all departments
-  const [rows, fields] = await connection.query('SELECT * FROM departments');
+  const [rows, fields] = await connection.execute('SELECT * FROM departments');
 
   // display the departments in a table
   console.table(rows);
