@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'your_database_name'
+  database: 'my_database'
 });
 
 // function to start the application
@@ -204,9 +204,13 @@ await connection.query('UPDATE employees SET role_id = ? WHERE id = ?', [role_id
 console.log("Employee's role updated successfully!");
 };
 
-  // connect to the database and start the application
-  connection.connect(err => {
-    if (err) throw err;
+// connect to the database and start the application
+(async () => {
+  try {
+    await connection;
     console.log('Connected to the MySQL database!');
     start();
-  });
+  } catch (err) {
+    console.error('Error connecting to the database:', err);
+  }
+})();
